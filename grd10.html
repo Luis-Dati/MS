@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Khối 10</title>
+	<style>
+		body {
+			font-family:sans-serif;
+			background-image:linear-gradient(135deg,white,#D5EFFF);
+			margin:0;
+			height: 1000px;
+		}
+		header {
+			height: 96px;
+			background-color:#F7F7F7;
+			position: sticky;
+			top: 0;
+			right: 0;
+			left: 0;
+		}
+		.head-container {
+			display: flex;
+			flex-direction:row;
+			justify-content: space-between;
+		}
+
+		/*medium head*/
+
+			/*navbar desktop*/
+		.navbar-link {
+			display:flex;
+			flex-direction:row;
+			align-items: center;
+			justify-content:space-between;
+		}
+		.menu-box {
+			display: flex;
+			flex-direction:row;
+			margin: 0;
+			padding: 0;
+			font-weight:700;
+			margin-right:2rem;
+			align-items:center;
+		}
+		.grd a {
+			text-decoration:none;
+			color:black;
+			padding: 0.9rem;
+			display: block;
+		}
+		.grd:hover {
+			background-color:gray;
+		}
+		.lock {
+			display: none;
+		}
+
+			/*navbar dt*/
+		.hamburger {
+			position:absolute;
+			top:2.25rem;
+			right: 1rem;
+			display:none;
+			flex-direction:column;
+			justify-content:space-between;
+			width: 30px;
+			height: 20px;
+		}
+		.hamburger .bar{
+			height: 3px;
+			width: 100%;
+			background-color:black;
+			border-radius:10px;
+		}
+
+		@media (max-width:810px) {
+			.hamburger {
+				display:flex;
+			}
+			.navbar-link {
+				display: none;
+				width: 105%;
+				flex-direction:column;
+				background-color:transparent;
+				align-items:flex-end;
+		
+			}
+			.head-container {
+				flex-direction:column;
+			}
+			.navbar-link.active {
+				display:flex;
+			}
+			.menu-box {
+				flex-direction:column;
+				width:120px;
+				text-align:center;
+				background-color:#F7F7F7;
+			}
+			.LoginBtn {	
+				margin-right:20px;
+			}
+			.login-box {
+				background-color:#F7F7F7;
+				width: 120px;
+			}
+		}
+
+		/*left head*/
+		.logo-container {
+			display:flex;
+			flex-direction:row;
+			align-items:center;
+			font-family:sans-serif;
+			font-size:23px;
+			font-weight:700;
+			padding:0.35rem 0.75rem 0.25rem 0.75rem;
+		}
+		.logopic {
+			width: 82px;
+			height:82px;
+			object-fit: cover;
+			margin-right:0.8rem;
+		}
+
+		/*right head*/
+		.LoginBtn {
+			background-color:#F7F7F7;
+			border:2px solid #43BEE1;
+			border-radius:3px;
+			padding:0.5rem 1rem;
+			font-weight:700;
+			font-size:16px;
+		}
+		.LoginBtn:hover, .LoginBtn:active {
+			background-color:#43BEE1;
+			color:white;
+			transition:0.5s;
+		}
+		.login-box {
+			display: flex;
+			position:relative;
+			justify-content:end;
+			align-items:center;
+			margin-right:2rem;
+		}
+		.login-box::before {
+			width:9rem;
+			background-color:lightcyan;
+			border:0.2px solid black;
+			border-radius:3px;
+			position:absolute;
+			bottom:-4rem;
+			right:2rem;
+			content:"You're guest. Please login to continue your task";
+			opacity:0;
+			animation-name:hide;
+			animation-iteration-count:2;
+			animation-direction:alternate;
+			animation-delay:0.5s;
+			animation-duration:4s;
+		}
+		@keyframes hide {
+			0% {opacity:0}
+			100% {opacity:1}
+		}
+		#logged-box{
+			position: relative;
+		}
+		.after-title {
+			width:12rem;
+			font-size:16px;
+			font-weight:300;
+			background-color:lightcyan;
+			border:0.2px solid black;
+			border-radius:3px;
+			position:absolute;
+			bottom:-0.5rem;
+			right:0.3rem;
+			opacity:0;
+			animation-name:hide;
+			animation-iteration-count:2;
+			animation-direction:alternate;
+			animation-delay:0.5s;
+			animation-duration:4s;
+		}	
+
+		/*Body*/
+		#time {
+			margin-top:1rem;
+		}
+		.ndung {
+			margin:2rem 2rem;
+		}
+		.body-content {
+			margin-top:2rem;
+			display: grid;
+			grid-template-columns:1fr 1fr 1fr 1fr;
+			grid-gap:0.75rem 1.75rem;
+		}
+		p {
+			font-weight: 700;
+			font-size:18px;
+			text-align:center;
+			background-color:lightseagreen;
+			color:white;
+			margin: 0;
+			padding:0.5rem;
+		}
+		.show-box {
+			border:2px solid lightseagreen;
+			border-radius:5px;
+		}
+		.show {
+			margin:0.5rem;
+			font-size:15px;
+		}
+		@media (max-width:985px) {
+			.body-content {
+				grid-template-columns:1fr 1fr 1fr;
+				grid-gap:0.75rem 1.5rem;
+			}
+			.ndung {
+				margin:2rem 1.5rem
+			}
+		}
+		@media (max-width:750px) {
+			.body-content {
+				grid-template-columns:1fr 1fr;
+				grid-gap:0.75rem 1.25rem
+			}
+			.ndung {
+				margin:2rem 1rem;
+			}
+			p {
+				font-size:16px;
+			}
+		}
+		@media (max-width: 480px) {
+			.body-content {
+				grid-template-columns:1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="header">
+		<div class="head-container">
+			<div class="logo-container">
+				<div>
+					<a href="template.html">
+						<img class="logopic" src="ms-high-resolution-logo-color-on-transparent-background.png">
+					</a>     
+				</div>
+				<div>Management Shool</div>    
+			</div>
+
+			<!-- navbar bản desktop -->
+			<nav class="navbar-link">
+				<div class="menu-box">
+					<div class="grd"><a href="grd10.html">Khối 10</a></div>
+					<div class="grd"><a href="grd11.html">Khối 11</a></div>
+					<div class="grd"><a href="grd12.html">Khối 12</a></div>
+					<button onclick="yourtask()" style="background-color:transparent;border:none;padding:0;font-weight:700;font-size:16px">
+						<div class="grd lock" id="u_task">
+							<a href="#">Nhiệm vụ</a>
+						</div>
+					</button>
+					<button onclick="logout()" style="background-color:transparent;border:none;padding:0">
+						<div class="grd lock" id="logged-box">
+							<a href="#">
+								<img style="width:2.5rem" src="https://www.pngfind.com/pngs/b/555-5551803_verified-png.png?fbclid=IwAR0bM8UxSLwTiIgpnB9tqi3mA4gi2AS9vfdwQI5V1qaFbg1q-dYnHE4ftHo">
+							</a>
+							<div class="after-title"></div>
+						</div>
+					</button>
+				</div>
+				<div class="login-box">
+					<a href="login.html">
+						<button title="You're guest. Please login to continue your task" class="LoginBtn">Login</button>
+					</a>
+				</div>
+			</nav>
+
+			<!-- navbar bản đt            -->
+			<a href="#" class="hamburger">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</a>
+		</div>       
+	</header>
+
+	<main class="ndung">
+		<div style="
+			font-size: 50px;
+			border-bottom:2px solid blue;   
+			display: inline-block; 		
+		">Khối 10</div>
+		<div id="time"></div>
+		<div class="body-content">
+			<div class="show-box">
+				<p>10t1</p>
+				<div class="show" id="cl10t1"></div>
+			</div>
+			<div class="show-box">
+				<p>10t2</p>
+				<div class="show" id="cl10t2"></div>
+			</div>
+			<div class="show-box">
+				<p>10t3</p>
+				<div class="show" id="cl10t3"></div>
+			</div>
+			<div class="show-box">
+				<p>10t4</p>
+				<div class="show" id="cl10t4"></div>
+			</div>
+			<div class="show-box">
+				<p>10x1</p>
+				<div class="show" id="cl10x1"></div>
+			</div>
+			<div class="show-box">
+				<p>10x2</p>
+				<div class="show" id="cl10x2"></div>
+			</div>
+			<div class="show-box">
+				<p>10x3</p>
+				<div class="show" id="cl10x3"></div>
+			</div>
+			<div class="show-box">
+				<p>10x4</p>
+				<div class="show" id="cl10x4"></div>
+			</div>
+		</div>
+	</main>
+
+	<script type="text/javascript">
+		//navigatior menu
+		const hamburgerBtn=document.querySelector('.hamburger');
+		const navbarlink=document.querySelector('.navbar-link');
+		hamburgerBtn.addEventListener('click',function(){
+			navbarlink.classList.toggle('active')
+		});
+
+
+		const logined=JSON.parse(localStorage.getItem('is_login'));
+		const client_area=document.querySelector('.login-box');
+		const task=document.querySelector('#u_task');
+		
+		const logged=document.querySelector('#logged-box');
+		const role=JSON.parse(localStorage.getItem('role'));
+		const after_title=document.querySelector('.after-title');
+
+		//logout
+		function logout(){
+			let isConfirm=confirm("Bạn có chắc muốn đăng xuất ko");
+			if (isConfirm) {
+				localStorage.setItem('is_login',JSON.stringify("no"));
+				localStorage.removeItem("role");
+				location.reload();
+			}
+		};
+
+		//login
+		function yourtask(){
+			fetch("https://63d5eb0a94e769375ba964a1.mockapi.io/api/Thursday")
+				.then(function(res){
+					return res.json() 
+				})
+				.then(function(data){
+					console.log(data);
+					switch (role) {
+					case "admin":
+						window.location.href="admin.html"
+					case "10t1":
+						window.location.href=data[0].link; 
+						break
+					case "10t2":
+						window.location.href=data[1].link;
+						break
+					case "10t3":
+						window.location.href=data[2].link; 
+						break
+					case "10t4":
+						window.location.href=data[3].link;
+						break
+					case "10x1":
+						window.location.href=data[4].link; 
+						break
+					case "10x2":
+						window.location.href=data[5].link;
+						break
+					case "10x3":
+						window.location.href=data[6].link; 
+						break
+					case "10x4":
+						window.location.href=data[7].link;
+						break
+					};
+				})
+		};
+
+		if (logined==="yes") {
+			client_area.style="display:none";
+			task.classList.remove('lock');
+			logged.classList.remove('lock');
+
+			let htmls=`You logged with ${role} role`
+			after_title.innerHTML=htmls;
+		};
+
+		//render data
+		//day
+		const timeBlock=document.querySelector("#time");
+		const time=new Date();
+		const day=time.getDay()
+		const date=time.getDate();
+		const month=time.getMonth()+1;
+		const year=time.getFullYear();
+		
+		//in thời gian hiện tại
+		let thgian=`Thứ ${day+1} ngày ${date} tháng ${month} năm ${year}`;
+		timeBlock.innerHTML=thgian;
+
+		//data	
+		switch (day) {
+		case 0:
+			dataApi="https://63d484c9c52305feff6476e6.mockapi.io/api/Monday";
+			Handle(dataApi);
+			break;
+		case 1:
+			dataApi="https://63d484c9c52305feff6476e6.mockapi.io/api/Monday";
+			Handle(dataApi);
+			break;
+		case 2:
+			dataApi="https://63d484c9c52305feff6476e6.mockapi.io/api/Monday";
+			Handle(dataApi);	
+			break;
+		case 3:
+			dataApi="https://63d484c9c52305feff6476e6.mockapi.io/api/Wednesday";
+			Handle(dataApi);
+			break;
+		case 4:
+			Thu5();
+			break;
+		case 5:
+					
+			break;
+		case 6:
+			dataApi="https://63d484c9c52305feff6476e6.mockapi.io/api/Monday";
+			Handle(dataApi);
+		};
+
+		function Handle(dataApi,cl) {
+			//lấy data
+			fetch(dataApi)
+				.then(function(res){
+					return res.json()
+				})
+				.then(function(res){
+					render(res)
+				});
+
+			function render(datas) {
+				//10t1
+				const classBlock10t1=document.querySelector('#cl10t1');
+				let print10t1=datas.map(function(data){
+					if (data.class==="10t1") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10t1.innerHTML=print10t1.join('');
+				
+				//10t2
+				const classBlock10t2=document.querySelector('#cl10t2');
+				let print10t2=datas.map(function(data){
+					if (data.class==="10t2") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10t2.innerHTML=print10t2.join('');
+
+				//10t3
+				const classBlock10t3=document.querySelector('#cl10t3');
+				let print10t3=datas.map(function(data){
+					if (data.class==="10t3") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10t3.innerHTML=print10t3.join('');
+
+				//10t4
+				const classBlock10t4=document.querySelector('#cl10t4');
+				let print10t4=datas.map(function(data){
+					if (data.class==="10t4") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10t4.innerHTML=print10t4.join('');
+			
+				//10t4
+				const classBlock10x1=document.querySelector('#cl10x1');
+				let print10x1=datas.map(function(data){
+					if (data.class==="10x1") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10x1.innerHTML=print10x1.join('');
+
+				//10t4
+				const classBlock10x2=document.querySelector('#cl10x2');
+				let print10x2=datas.map(function(data){
+					if (data.class==="10x2") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10x2.innerHTML=print10x2.join('');
+
+				//10t4
+				const classBlock10x3=document.querySelector('#cl10x3');
+				let print10x3=datas.map(function(data){
+					if (data.class==="10x3") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10x3.innerHTML=print10x3.join('');
+
+				//10t4
+				const classBlock10x4=document.querySelector('#cl10x4');
+				let print10x4=datas.map(function(data){
+					if (data.class==="10x4") {
+						return `<div>-${data.name_vp}: ${data.quantity} học sinh</div>`
+					}
+				});
+				classBlock10x4.innerHTML=print10x4.join('');
+
+
+			}
+
+		}
+		
+	</script>
+</body>
+</html>

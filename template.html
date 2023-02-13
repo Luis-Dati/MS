@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Document</title>
+	<style>
+		body {
+			font-family:sans-serif;
+			background-image:linear-gradient(135deg,white,#D5EFFF);
+			margin:0;
+		}
+		header {
+			height: 95px;
+			background-color: whitesmoke;
+			position: sticky;
+			top: 0;
+			right: 0;
+			left: 0;
+		}
+		.lock {
+			display: none;
+		}
+		.head-container {
+			display: flex;
+			flex-direction:row;
+			justify-content: space-between;
+		}
+		.logo-container {
+			display:flex;
+			flex-direction:row;
+			align-items:center;
+			font-family:sans-serif;
+			font-size:23px;
+			font-weight:700;
+			padding:7px 16px;
+		}
+		.logopic {
+			width: 82px;
+			height:82px;
+			object-fit: cover;
+			margin-right:0.8rem;
+		}
+		.client-box {
+			display: flex;
+			position:relative;
+			justify-content:end;
+			align-items:center;
+			margin-right:1.75rem;
+		}
+		.before-log::before {
+			width: 130px;
+			background-color:lightcyan;
+			border:0.2px solid black;
+			border-radius:3px;
+			position:absolute;
+			bottom:-30px;
+			right:3px;
+			content:"You're guest. Please login to continue your task";
+			opacity:0;
+			animation-name:hide;
+			animation-iteration-count:2;
+			animation-direction:alternate;
+			animation-delay:0.5s;
+			animation-duration:5s;
+		}	
+		.after-title {
+			width: 130px;
+			background-color:lightcyan;
+			border:0.2px solid black;
+			border-radius:3px;
+			position:absolute;
+			bottom:-1rem;
+			right:0.5rem;
+			opacity:0;
+			animation-name:hide;
+			animation-iteration-count:2;
+			animation-direction:alternate;
+			animation-delay:0.5s;
+			animation-duration:6s;
+		}	
+		@keyframes hide {
+			0% {opacity:0}
+			100% {opacity:1}
+		}
+		.intro {
+			padding-top:8rem;
+			padding-bottom:8rem;
+			background-image:linear-gradient(135deg,white,#37B1FC);
+			margin-top:10px;
+			display: flex;
+			justify-content:center;
+		}
+		.container_intro {
+			display: flex;
+			flex-direction:row;
+			width:80rem;
+		}
+		@media (max-width:800px) {
+			.container_intro {
+				flex-direction:column;
+			}
+		}
+		.log_but {
+			font-size:15.7px;
+			font-weight: bold;
+			height: 55px;
+			width: 159px;
+			background-color: white;
+			color:#232323;
+			border: none;
+			border-radius:5px;
+		}
+		.log_but:hover {
+			text-decoration: underline;
+			cursor:pointer;
+		}
+		.log_but:active {
+			opacity:0.5;
+		}
+		.content {
+			display:flex;
+			flex:1.5;
+			flex-direction:column;
+			justify-content:center;
+			align-items: center;
+		}
+		.login {
+			display:flex;
+			flex:1;
+			justify-content:center;
+			align-items:center;
+			padding-left: 10px;
+		}
+		.func {
+			display: flex;
+			flex-direction:column;
+			padding:3rem 0rem 6rem;
+			margin:0.5rem;
+			margin-top:25px;
+			background-color:white;
+			border-radius: 1rem;
+		}
+		@media (min-width:950px) {
+			.func{
+				margin:0 auto;
+				margin-top:2rem;
+				width: 850px;
+			}
+		}
+		.container_func {
+			/*sau khi thu nhỏ*/
+			display: grid;
+			grid-template-columns:1fr;
+			row-gap:15px;
+		}
+		.container_func a{
+			text-decoration:none;
+		}
+		.grd {
+			background-image:linear-gradient(135deg,blue,red,yellow);
+			padding: 1rem 1rem;
+			margin:0px 30px 0px 30px;
+			font-size:29px;
+			color:white;
+			font-weight:bold;
+			text-align:center;
+		} 
+		.grd:hover {
+			background-color:#efefef;
+			color:black;
+			transition: 0.5s
+		}
+		@media (min-width:609px) {
+			/*trước khi thu nhỏ*/
+			.container_func {
+				display: grid;
+				grid-template-columns:1fr 1fr 1fr;
+				text-align:center;
+			}
+			.grd {
+				max-width: 300px;
+			} 
+		}
+
+/*		lich truc*/
+		.Menu{
+			display:flex;
+			justify-content:center;
+			margin:0.5rem;
+		}
+		.Menu button{
+			font-size: 20px;
+			padding:1rem;
+			margin:1rem 0.3rem;
+			margin-top:-2rem;
+			border:none;
+			cursor:pointer;
+			border-bottom:1px solid black;
+		}
+		.Menu button.active {
+			background-color:deepskyblue;
+			border:none;
+		}
+		.calen-box {
+			display: none;
+			grid-template-columns:1fr 1fr;
+			border:.1px solid black;
+		}
+		.calen-box li{
+			list-style: none;
+			border:.1px solid black;
+			padding: 1rem;
+			text-align:center;
+		}
+		.calen-box h2{
+			border:.1px solid black;
+			padding: 1.25rem;
+			margin:0;
+			text-align:center;
+		}
+		.calen-box.active {
+			display:grid;
+		}
+		/*footer*/
+		.footer{
+			background: #666;
+			box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+			box-sizing: border-box;
+			width: 100%;
+			text-align: left;
+			font: bold 16px sans-serif;
+			margin-top:25px;
+			padding:2.5rem;
+		}
+
+		.footer .footer-left,
+		.footer .footer-center,
+		.footer .footer-right{
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		/* Footer left */
+
+		.footer .footer-left{
+		  width: 40%;
+		}
+
+		/* The company logo */
+
+		.footer h3{
+			color:  #ffffff;
+			font: normal 36px 'Arial', cursive;
+			margin: 0;
+		}
+
+		.footer h3 span{
+			color:  lightseagreen;
+		}
+
+		/* Footer links */
+
+		.footer .footer-links{
+			color:  #ffffff;
+			margin: 20px 0 12px;
+			padding: 0;
+		}
+
+		.footer .footer-links a{
+			display:inline-block;
+			line-height: 1.8;
+			font-weight:400;
+			text-decoration: none;
+			color:  inherit;
+		}
+
+		.footer .footer-company-name{
+			color:  #222;
+			font-size: 14px;
+			font-weight: normal;
+			margin: 0;
+		}
+
+		/* Footer Center */
+
+		.footer .footer-center{
+			width: 35%;
+		}
+
+		.footer .footer-center i{
+			background-color:  #33383b;
+			color: #ffffff;
+			font-size: 25px;
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+			text-align: center;
+			line-height: 42px;
+			margin: 10px;
+			vertical-align: middle;
+		}
+
+		.footer .footer-center i.fa-envelope{
+			font-size: 17px;
+			line-height: 38px;
+		}
+
+		.footer .footer-center p{
+			display: inline-block;
+			color: #ffffff;
+			font-weight:400;
+			vertical-align: middle;
+			margin:0;
+		}
+
+		.footer .footer-center p span{
+			display:block;
+			font-weight: normal;
+			font-size:14px;
+			line-height:2;
+		}
+
+		.footer .footer-center p a{
+			color:  lightseagreen;
+			text-decoration: none;;
+		}
+
+		.footer .footer-links a:before {
+			content: "|";
+			font-weight:300;
+			font-size: 20px;
+			left: 0;
+			color: #fff;
+			display: inline-block;
+			padding-right: 5px;
+		}
+
+		.footer .footer-links .link-1:before {
+			content: none;
+		}
+
+		/* Footer Right */
+
+		.footer .footer-right{
+			width: 20%;
+		}
+
+		.footer .footer-company-about{
+			line-height: 20px;
+			color:  #92999f;
+			font-size: 13px;
+			font-weight: normal;
+			margin: 0;
+		}
+
+		.footer .footer-company-about span{
+			display: block;
+			color:  #ffffff;
+			font-size: 14px;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+
+		.footer .footer-icons{
+			margin-top: 25px;
+		}
+
+		.footer .footer-icons a{
+			display: inline-block;
+			width: 35px;
+			height: 35px;
+			cursor: pointer;
+			background-color:  #33383b;
+			border-radius: 2px;
+
+			font-size: 20px;
+			color: #ffffff;
+			text-align: center;
+			line-height: 35px;
+
+			margin-right: 3px;
+			margin-bottom: 5px;
+		}
+
+		/* If you don't want the footer to be responsive, remove these media queries */
+
+		@media (max-width: 760px) {
+
+			.footer {
+				font: bold 14px sans-serif;
+			}
+
+			.footer .footer-left,
+			.footer .footer-center,
+			.footer .footer-right{
+				display: block;
+				width: 100%;
+				margin-bottom: 40px;
+				text-align: center;
+			}
+
+			.footer .footer-center i{
+				margin-left: 0;
+			}
+
+		}
+	</style>
+</head>
+<body>
+	<header class="header">
+		<div class="head-container">
+			<div class="logo-container">
+				<div>
+					<a href="template.html">
+						<img class="logopic" src="ms-high-resolution-logo-color-on-transparent-background.png">
+					</a>     
+				</div>
+				<div>Management Shool</div>    
+			</div>
+			<div class="client-box">
+				<div class="before-log">
+					<a href="login.html">
+						<button title="You're guest. Please login to continue your task" style="border:1.5px solid black;border-radius: 50%;">
+							<img style="width:1.5rem" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Font_Awesome_5_regular_user.svg">
+						</button>
+					</a>
+				</div>
+				<div class="after-log lock">
+					<a href="#">
+						<img style="width:2.75rem" src="https://www.pngfind.com/pngs/b/555-5551803_verified-png.png?fbclid=IwAR0bM8UxSLwTiIgpnB9tqi3mA4gi2AS9vfdwQI5V1qaFbg1q-dYnHE4ftHo">
+					</a>
+					<div class="after-title"></div>
+				</div>	
+			</div>           
+		</div>       
+	</header>
+	<!--content-->
+
+	<!-- giới thiệu Mở đầu -->
+	<div class="intro">
+		<div class="container_intro">
+			<div class="content">
+				<p style="
+					margin-top: 0;
+					font-size: 20px;
+					color: #969696;
+					font-weight:bold;
+				">Welcome to our website</p>
+				<p style="
+					margin-top:0;
+					font-size: 50px;
+					color:black;
+					font-weight:bold;
+					text-align:center;
+				">Management Shool</p>
+			</div>
+			<div class="login">
+				<a href="login.html">
+					<button class="log_but" onclick="log()">Log in</button>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<main>
+		<!-- mục khối học -->
+		<div class="func">
+			<p style="
+				font-size:50px;
+				color:#232323;
+				font-weight:bold;
+				text-align: center;
+				margin:0;
+				padding:0px 15px 48px
+			">Khối học</p>
+			<div class="container_func">
+				<a href="grd10.html">
+					<div class="grd" id="grd10">
+						<p>Khối 10</p>
+					</div>
+				</a>
+				<div class="grd" id="grd11">
+					<p>Khối 11</p>
+				</div>
+				<div class="grd" id="grd12">
+					<p>Khối 12</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Mục lịch trực -->
+		<div class="func">
+			<p style="
+				font-size:50px;
+				color:#232323;
+				font-weight:bold;
+				text-align: center;
+				margin:0;
+				padding:0px 15px 48px
+			">Lịch trực</p>
+	
+			<!-- Tab Menu -->
+			<div class="Menu">
+				<button class="Btn10 active">Khối 10</button>
+				<button class="Btn11">Khối 11</button>
+				<button class="Btn12">Khối 12</button>
+			</div>
+			<!-- Tad content -->
+			<div class="calen-box grade10 active">	
+				<h2>Lớp</h2>
+				<h2>Lớp trực</h2>
+				<div>
+					<li>10t1</li>
+					<li>10t2</li>
+					<li>10t3</li>
+					<li>10t4</li>
+					<li>10x1</li>
+					<li>10x2</li>
+					<li>10x3</li>
+					<li>10x4</li>
+				</div>
+				<div class="calendar" id="a10">
+				</div>
+			</div>
+
+			<div class="calen-box grade11">	
+				<h2>Lớp</h2>
+				<h2>Lớp trực</h2>
+				<div>
+					<li>11t1</li>
+					<li>11t2</li>
+					<li>11t3</li>
+					<li>11t4</li>
+					<li>11x1</li>
+					<li>11x2</li>
+					<li>11x3</li>
+					<li>11x4</li>
+				</div>
+				<div class="calendar" id="a11">
+				</div>
+			</div>
+
+			<div class="calen-box grade12">	
+				<h2>Lớp</h2>
+				<h2>Lớp trực</h2>
+				<div>
+					<li>12t1</li>
+					<li>12t2</li>
+					<li>12t3</li>
+					<li>12t4</li>
+					<li>12x1</li>
+					<li>12x2</li>
+					<li>12x3</li>
+					<li>12x4</li>
+				</div>
+				<div class="calendar" id="a12">
+				</div>
+			</div>
+
+		</div>
+	</main>
+
+	<!--end content-->
+	<footer class="footer">
+
+		<div class="footer-left">
+
+			<h3>Company<span>logo</span></h3>
+
+			<p class="footer-links">
+				<a href="#" class="link-1">Home</a>
+
+				<a href="#">Blog</a>
+
+				<a href="#">About</a>
+
+				<a href="mailto:le12duy12dat12@gmail.com">Contact</a>
+			</p>
+
+			<p class="footer-company-name">Company Name © 2015</p>
+		</div>
+
+		<div class="footer-center">
+
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p><span>Huyện Dầu Tiếng</span>tỉnh Bình Dương</p>
+			</div>
+
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>012 3456 789</p>
+			</div>
+
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p><a href="mailto:le12duy12dat12@gmail.com">support@company.com</a></p>
+			</div>
+
+		</div>
+
+		<div class="footer-right">
+
+			<p class="footer-company-about">
+				<span>About the company</span>
+				Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+			</p>
+
+			<div class="footer-icons">
+
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+
+			</div>
+
+		</div>
+	</footer>
+	<script type="text/javascript">
+		const Btn10=document.querySelector(".Btn10");
+		const Btn11=document.querySelector(".Btn11");
+		const Btn12=document.querySelector(".Btn12");
+
+		let List10=document.querySelector(".grade10");
+		let List11=document.querySelector(".grade11");
+		let List12=document.querySelector(".grade12");
+
+		Btn10.onclick=function(){
+			Btn10.classList.add('active');
+			Btn11.classList.remove('active');
+			Btn12.classList.remove('active');
+
+			List10.classList.add('active');
+			List11.classList.remove('active');
+			List12.classList.remove('active');
+		};
+
+		Btn11.onclick=function(){
+			Btn10.classList.remove('active');
+			Btn11.classList.add('active');
+			Btn12.classList.remove('active');
+			
+			List10.classList.remove('active');
+			List11.classList.add('active');
+			List12.classList.remove('active');
+		};
+
+		Btn12.onclick=function(){
+			Btn10.classList.remove('active');
+			Btn11.classList.remove('active');
+			Btn12.classList.add('active');
+
+			List10.classList.remove('active');
+			List11.classList.remove('active');
+			List12.classList.add('active');	
+		};
+	</script>
+	<script type="text/javascript">
+		const before_area=document.querySelector('.before-log');
+		const after_area=document.querySelector('.after-log');
+		const after_title=document.querySelector('.after-title');
+
+		const logined = JSON.parse(localStorage.getItem('is_login'));		
+		const login_area=document.querySelector('.login');
+		const role=JSON.parse(localStorage.getItem('role'));
+
+		if (logined==="yes") {
+			before_area.style="display:none";
+			login_area.style="display:none";
+			after_area.classList.toggle('lock');
+			
+			let htmls=`You logged with ${role} role`;
+			after_title.innerHTML=htmls;
+		};
+
+		//hien thi lich truc
+		let isScram=false;
+		switch (new Date().getDay()) {
+		case 0:
+			isScram=false;
+			renderDefault();
+			break; 
+		case 5:
+			if (isScram===false) {
+				Scramble();
+				isScram=true;
+			} else {
+				renderDefault();
+			}
+			break;
+		default:
+			renderDefault()
+		};
+
+		function renderDefault(){
+			fetch("https://63d5eb0a94e769375ba964a1.mockapi.io/api/Thursday")
+				.then(function(res){
+					return res.json()
+				})
+				.then(function(res){
+					console.log(res);
+					renderCalendar(res)
+				})
+		}
+
+		function Scramble() {			
+			fetch("https://63d5eb0a94e769375ba964a1.mockapi.io/api/Thursday")
+				.then(function(res){
+					return res.json()
+				})
+				.then(function(lich_truc){
+					lich_truc.forEach(function(day){
+						day.id=Math.floor(Math.random()*1000)
+					});
+					lich_truc.sort(function(link1,link2){
+						return link1.id-link2.id
+					});
+
+					console.log(lich_truc);
+					reloadData(lich_truc);
+					renderCalendar(lich_truc);
+				})
+
+			function reloadData(data) {
+				let interval=setInterval(function(){
+					let option={
+						method:"PUT",
+						headers:{}
+					}
+					fetch("https://63d5eb0a94e769375ba964a1.mockapi.io/api/Thursday",option)
+				})
+						
+			}
+			//end Scramble
+		};
+		
+		function renderCalendar(data){
+			console.log(data);			
+			let calendar10_area=document.querySelector('#a10');
+			let calendar10=data.map(function(day,index){
+				if (index<8) {
+					return `<li>${day.class}</li>`
+				}
+			});
+			calendar10_area.innerHTML=calendar10.join('');
+			
+			let calendar11_area=document.querySelector('#a11');
+			let calendar11=data.map(function(day,index){
+				if (index>7 && index<16) {							
+					return `<li>${day.class}</li>`
+				}
+			});
+			calendar11_area.innerHTML=calendar11.join('');
+
+			let calendar12_area=document.querySelector('#a12');
+			let calendar12=data.map(function(day,index){
+				if (index>15 && index<24) {
+					return `<li>${day.class}</li>`
+				}
+			});
+			calendar12_area.innerHTML=calendar12.join('');			
+		}
+
+	</script>
+</body>
+</html>
